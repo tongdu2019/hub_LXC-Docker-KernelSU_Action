@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build Kernel by ${{ github.actor }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
@@ -16,7 +16,7 @@ jobs:
       CCACHE_HARDLINK: "true"
       CI: "false"
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
     - name: Prepare Configuration
       run: |
         CONFIG_ENV=$(cat config.env | grep -w "CONFIG_ENV" | head -n 1 | cut -d "=" -f 2)
